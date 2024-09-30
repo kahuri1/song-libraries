@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	"github.com/kahuri1/song-libraries/pkg/model"
+	"github.com/pressly/goose"
+	"github.com/sirupsen/logrus"
 )
 
 type Repository struct {
@@ -17,7 +19,7 @@ func NewRepository(db *sqlx.DB) *Repository {
 }
 
 func NewPostgresDB(cfg model.Config) (*sqlx.DB, error) {
-	db, err := sqlx.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
+	db, err := sqlx.Connect("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
 		cfg.Host, cfg.Port, cfg.Username, cfg.DBName, cfg.Password, cfg.SSLmode))
 
 	if err != nil {
@@ -27,6 +29,9 @@ func NewPostgresDB(cfg model.Config) (*sqlx.DB, error) {
 	err = db.Ping()
 	if err != nil {
 		return nil, err
+	}
+	if err := goose.Up(db.DB, "migrations"); err != nil {
+		logrus.Fatal(err)
 	}
 	return db, nil
 }

@@ -1,14 +1,15 @@
 package main
 
 import (
+	_ "github.com/jmoiron/sqlx"
 	songLibs "github.com/kahuri1/song-libraries"
 	"github.com/kahuri1/song-libraries/pkg/handler"
 	"github.com/kahuri1/song-libraries/pkg/model"
 	"github.com/kahuri1/song-libraries/pkg/repository"
 	"github.com/kahuri1/song-libraries/pkg/service"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"os"
 )
 
 func main() {
@@ -24,7 +25,7 @@ func main() {
 		Username: viper.GetString("db.username"),
 		DBName:   viper.GetString("db.dbname"),
 		SSLmode:  viper.GetString("db.sslmode"),
-		Password: os.Getenv("DB_PASSWORD"),
+		Password: viper.GetString("db.password"),
 	})
 	if err != nil {
 		logrus.Errorf("Failed initialization db: %s", err.Error())
