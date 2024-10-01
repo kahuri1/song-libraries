@@ -11,6 +11,7 @@ type songLibsService interface {
 	PostAddSong(g model.Song) (int64, error)
 	PostSongDetails(g model.SongDetail) (int64, error)
 	DeleteGroup(id int64) error
+	DeleteSong(id int64) error
 }
 
 type Handler struct {
@@ -27,6 +28,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	r.POST("/Group", h.PostAddGroup)
 	r.DELETE("/Group/", h.DeleteGroup)
 	r.POST("/Song", h.PostAddSong)
+	r.DELETE("/Song/", h.DeleteSong)
 	r.POST("/Song/Details", h.PostSongDetails)
 	return r
 }
