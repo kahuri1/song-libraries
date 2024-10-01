@@ -7,6 +7,7 @@ import (
 
 type songLibsService interface {
 	GetLibrary() (model.SongsResponse, error)
+	PostAddGroup(g model.Group) (int64, error)
 }
 
 type Handler struct {
@@ -20,6 +21,6 @@ func Newhandler(service songLibsService) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
 	r.GET("/library", h.GetLibrary)
-
+	r.POST("/Group", h.PostAddGroup)
 	return r
 }

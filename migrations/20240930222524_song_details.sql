@@ -7,7 +7,7 @@ CREATE TABLE if not exists song_detail (
     song_id INT NOT NULL,
     text TEXT NOT NULL,
     link VARCHAR(255),
-FOREIGN KEY (song_id) REFERENCES song(id) ON DELETE CASCADE
+FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE
 );
 -- +goose Down
 -- +goose StatementBegin

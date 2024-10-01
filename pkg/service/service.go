@@ -7,6 +7,8 @@ import (
 
 type repo interface {
 	GetLibrary() (model.SongsResponse, error)
+	PostAddGroup(g model.Group) (int64, error)
+	CheckPostAddGroup(g model.Group) (int64, error)
 }
 
 type Service struct {

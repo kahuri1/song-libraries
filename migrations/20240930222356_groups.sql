@@ -1,13 +1,11 @@
 -- +goose Up
--- +goose StatementBegin
-SELECT 'up SQL query';
--- +goose StatementEnd
-CREATE TABLE if not exists "group" (
+CREATE TABLE IF NOT EXISTS "groups" (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
+
+CREATE INDEX IF NOT EXISTS idx_group_name ON "groups" (name);
+
 -- +goose Down
--- +goose StatementBegin
-SELECT 'down SQL query';
-drop table if exists "group";
--- +goose StatementEnd
+DROP INDEX IF EXISTS idx_group_name;
+DROP TABLE IF EXISTS "groups";
