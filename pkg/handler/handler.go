@@ -8,6 +8,8 @@ import (
 type songLibsService interface {
 	GetLibrary() (model.SongsResponse, error)
 	PostAddGroup(g model.Group) (int64, error)
+	PostAddSong(g model.Song) (int64, error)
+	PostSongDetails(g model.SongDetail) (int64, error)
 }
 
 type Handler struct {
@@ -22,5 +24,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
 	r.GET("/library", h.GetLibrary)
 	r.POST("/Group", h.PostAddGroup)
+	r.POST("/Song", h.PostAddSong)
+	r.POST("/Song/Details", h.PostSongDetails)
 	return r
 }

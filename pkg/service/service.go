@@ -9,6 +9,11 @@ type repo interface {
 	GetLibrary() (model.SongsResponse, error)
 	PostAddGroup(g model.Group) (int64, error)
 	CheckPostAddGroup(g model.Group) (int64, error)
+	PostAddSong(g model.Song) (int64, error)
+	CheckAddSong(g *model.Song)
+	CheckDuplicateSong(g *model.Song) (int64, error)
+	PostSongDetails(g model.SongDetail) (int64, error)
+	CheckDuplicateSongDetail(g model.SongDetail) (int64, error)
 }
 
 type Service struct {

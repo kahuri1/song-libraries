@@ -6,10 +6,11 @@ type Group struct {
 }
 
 type Song struct {
-	ID      int    `json:"id"`
-	GroupID int    `json:"group_id"`
-	Title   string `json:"title"`
-	Date    string `json:"releaseDate"`
+	ID        int    `json:"id"`
+	GroupID   int    `json:"group_id"`
+	NameGroup string `json:"group"`
+	Title     string `json:"title"`
+	Date      string `json:"releaseDate"`
 }
 
 type SongDetail struct {
