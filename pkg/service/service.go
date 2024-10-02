@@ -16,6 +16,7 @@ type repo interface {
 	CheckDuplicateSongDetail(g model.SongDetail) (int64, error)
 	DeleteGroup(id int64) error
 	DeleteSong(id int64) error
+	PutUpdateSongDetails(g model.SongDetail) (bool, error)
 }
 
 type Service struct {

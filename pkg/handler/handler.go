@@ -10,6 +10,7 @@ type songLibsService interface {
 	PostAddGroup(g model.Group) (int64, error)
 	PostAddSong(g model.Song) (int64, error)
 	PostSongDetails(g model.SongDetail) (int64, error)
+	PutUpdateSongDetails(g model.SongDetail) (bool, error)
 	DeleteGroup(id int64) error
 	DeleteSong(id int64) error
 }
@@ -30,5 +31,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	r.POST("/Song", h.PostAddSong)
 	r.DELETE("/Song/", h.DeleteSong)
 	r.POST("/Song/Details", h.PostSongDetails)
+	r.PUT("/Song/Details", h.PutUpdateSongDetails)
 	return r
 }
