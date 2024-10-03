@@ -6,7 +6,7 @@ import (
 	"github.com/kahuri1/song-libraries/pkg/model"
 )
 
-func (r *Repository) PostAddGroup(g model.Group) (int64, error) {
+func (r *Repository) AddGroup(g model.Group) (int64, error) {
 	var id int64
 
 	sql, args, err := sq.

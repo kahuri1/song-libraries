@@ -20,6 +20,14 @@ type SongDetail struct {
 	Link   string `json:"link"`
 }
 
+type GetSongText struct {
+	ID     int64  `json:"id"`
+	SongID int64  `json:"songId"`
+	Title  string `json:"title"`
+	Text   string `json:"text"`
+	Link   string `json:"link"`
+}
+
 type SongResponse struct {
 	Song    Song         `json:"song"`
 	Group   Group        `json:"group"`
@@ -37,4 +45,10 @@ type Config struct {
 	Password string
 	DBName   string
 	SSLmode  string
+}
+
+type BodyPagination struct {
+	Lines []string `json:"lines"`
+	Page  int      `json:"page"`
+	Limit int      `json:"limit"`
 }

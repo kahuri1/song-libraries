@@ -8,24 +8,23 @@ import (
 	"net/http"
 )
 
-func (h *Handler) PostAddSong(c *gin.Context) {
+func (h *Handler) AddGroup(c *gin.Context) {
 
-	var song model.Song
-
+	var group model.Group
 	d, err := c.GetRawData()
 
-	err = json.Unmarshal(d, &song)
+	err = json.Unmarshal(d, &group)
 	if err != nil {
 		log.Errorf("unmarshal handlerError")
 
 		return
 	}
-	id, err := h.service.PostAddSong(song)
+
+	id, err := h.service.AddGroup(group)
 	if err != nil {
 		log.Printf("Failed to create group: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"id": id})
-
 }

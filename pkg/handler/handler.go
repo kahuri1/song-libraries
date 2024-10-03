@@ -6,13 +6,15 @@ import (
 )
 
 type songLibsService interface {
-	GetLibrary() (model.SongsResponse, error)
-	PostAddGroup(g model.Group) (int64, error)
-	PostAddSong(g model.Song) (int64, error)
-	PostSongDetails(g model.SongDetail) (int64, error)
-	PutUpdateSongDetails(g model.SongDetail) (bool, error)
+	Library() (model.SongsResponse, error)
+	AddGroup(g model.Group) (int64, error)
+	AddSong(g model.Song) (int64, error)
+	SongDetails(g model.SongDetail) (int64, error)
+	UpdateSongDetails(g model.SongDetail) (bool, error)
 	DeleteGroup(id int64) error
 	DeleteSong(id int64) error
+	SongText(g model.GetSongText) ([]string, error)
+	PaginationTextSong(g *model.BodyPagination) error
 }
 
 type Handler struct {
@@ -25,12 +27,13 @@ func Newhandler(service songLibsService) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
-	r.GET("/library", h.GetLibrary)
-	r.POST("/Group", h.PostAddGroup)
+	r.GET("/library", h.Library)
+	r.POST("/Group", h.AddGroup)
 	r.DELETE("/Group/", h.DeleteGroup)
-	r.POST("/Song", h.PostAddSong)
+	r.POST("/Song", h.AddSong)
 	r.DELETE("/Song/", h.DeleteSong)
-	r.POST("/Song/Details", h.PostSongDetails)
-	r.PUT("/Song/Details", h.PutUpdateSongDetails)
+	r.POST("/Song/Details", h.SongDetails)
+	r.PUT("/Song/Details", h.UpdateSongDetails)
+	r.GET("/Song/Details", h.SongText)
 	return r
 }

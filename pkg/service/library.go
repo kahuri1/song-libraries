@@ -2,9 +2,9 @@ package service
 
 import "github.com/kahuri1/song-libraries/pkg/model"
 
-func (s *Service) GetLibrary() (model.SongsResponse, error) {
+func (s *Service) Library() (model.SongsResponse, error) {
 
-	library, err := s.repo.GetLibrary()
+	library, err := s.repo.Library()
 	if err != nil {
 		return model.SongsResponse{}, err
 	}

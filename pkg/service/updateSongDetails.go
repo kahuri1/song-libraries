@@ -5,9 +5,9 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func (s *Service) PutUpdateSongDetails(detail model.SongDetail) (bool, error) {
+func (s *Service) UpdateSongDetails(detail model.SongDetail) (bool, error) {
 
-	val, err := s.repo.PutUpdateSongDetails(detail)
+	val, err := s.repo.UpdateSongDetails(detail)
 	if err != nil {
 		log.Errorf("failed to done song detail: %w", err)
 		return false, err

@@ -6,13 +6,13 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func (s *Service) PostSongDetails(g model.SongDetail) (int64, error) {
+func (s *Service) SongDetails(g model.SongDetail) (int64, error) {
 	checkSongID, err := s.repo.CheckDuplicateSongDetail(g)
 	if checkSongID != 0 {
 		return checkSongID, fmt.Errorf("the song_detail has already been created")
 	}
 
-	id, err := s.repo.PostSongDetails(g)
+	id, err := s.repo.SongDetails(g)
 	if err != nil {
 		log.Errorf("failed to create song_details: %w", err)
 	}

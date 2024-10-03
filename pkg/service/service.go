@@ -6,17 +6,19 @@ import (
 )
 
 type repo interface {
-	GetLibrary() (model.SongsResponse, error)
-	PostAddGroup(g model.Group) (int64, error)
+	Library() (model.SongsResponse, error)
+	AddGroup(g model.Group) (int64, error)
 	CheckPostAddGroup(g model.Group) (int64, error)
-	PostAddSong(g model.Song) (int64, error)
+	AddSong(g model.Song) (int64, error)
 	CheckAddSong(g *model.Song)
 	CheckDuplicateSong(g *model.Song) (int64, error)
-	PostSongDetails(g model.SongDetail) (int64, error)
+	SongDetails(g model.SongDetail) (int64, error)
 	CheckDuplicateSongDetail(g model.SongDetail) (int64, error)
 	DeleteGroup(id int64) error
 	DeleteSong(id int64) error
-	PutUpdateSongDetails(g model.SongDetail) (bool, error)
+	UpdateSongDetails(g model.SongDetail) (bool, error)
+	SongID(title string) (int64, error)
+	SongText(g model.GetSongText) (string, error)
 }
 
 type Service struct {

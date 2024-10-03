@@ -2,29 +2,27 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/kahuri1/song-libraries/pkg/model"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 )
 
-func (h *Handler) PostAddGroup(c *gin.Context) {
-
-	var group model.Group
+func (h *Handler) UpdateSongDetails(c *gin.Context) {
+	var songDetails model.SongDetail
 	d, err := c.GetRawData()
 
-	err = json.Unmarshal(d, &group)
+	err = json.Unmarshal(d, &songDetails)
 	if err != nil {
 		log.Errorf("unmarshal handlerError")
-
 		return
 	}
-
-	id, err := h.service.PostAddGroup(group)
+	_, err = h.service.UpdateSongDetails(songDetails)
 	if err != nil {
-		log.Printf("Failed to create group: %v", err)
+		log.Printf("Failed to update song detail: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"id": id})
+	c.JSON(http.StatusOK, gin.H{"info": fmt.Sprintf("updated")})
 }

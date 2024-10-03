@@ -6,7 +6,7 @@ import (
 	"github.com/kahuri1/song-libraries/pkg/model"
 )
 
-func (r *Repository) PutUpdateSongDetails(detail model.SongDetail) (bool, error) {
+func (r *Repository) UpdateSongDetails(detail model.SongDetail) (bool, error) {
 	//var existingSongDetail model.SongDetail
 	//err := r.db.Get(&existingSongDetail, "SELECT * FROM song_detail WHERE id=$1", detail.ID)
 	//if err != nil {

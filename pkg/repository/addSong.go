@@ -7,7 +7,7 @@ import (
 	"github.com/kahuri1/song-libraries/pkg/model"
 )
 
-func (r *Repository) PostAddSong(g model.Song) (int64, error) {
+func (r *Repository) AddSong(g model.Song) (int64, error) {
 	var id int64
 
 	sql, args, err := sq.
