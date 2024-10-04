@@ -28,14 +28,16 @@ type GetSongText struct {
 	Link   string `json:"link"`
 }
 
-type SongResponse struct {
-	Song    Song         `json:"song"`
-	Group   Group        `json:"group"`
-	Details []SongDetail `json:"details"`
+type SongsResponse struct {
+	SongLibs []SongLibs `json:"SongLibs"`
 }
 
-type SongsResponse struct {
-	Songs []Song `json:"songs"`
+type SongLibs struct {
+	GroupName   string `db:"group_name" json:"group_name"`
+	SongTitle   string `db:"song_title" json:"song_title"`
+	ReleaseDate string `db:"release_date" json:"release_date"`
+	SongText    string `db:"song_text" json:"song_text"`
+	SongLink    string `db:"song_link" json:"song_link"`
 }
 
 type Config struct {
