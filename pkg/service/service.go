@@ -6,7 +6,7 @@ import (
 )
 
 type repo interface {
-	Library() (model.SongsResponse, error)
+	Library(config model.LibraryConfig) (model.SongsResponse, error)
 	AddGroup(g model.Group) (int64, error)
 	CheckPostAddGroup(g model.Group) (int64, error)
 	AddSong(g model.Song) (int64, error)

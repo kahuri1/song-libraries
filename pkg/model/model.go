@@ -32,6 +32,13 @@ type SongsResponse struct {
 	SongLibs []SongLibs `json:"SongLibs"`
 }
 
+type LibraryConfig struct {
+	SortTitle string `json:"sortTitle"`
+	SortOrder string `json:"sortOrder"`
+	Page      int    `json:"page"`
+	PageSize  int    `json:"pageSize"`
+}
+
 type SongLibs struct {
 	GroupName   string `db:"group_name" json:"group_name"`
 	SongTitle   string `db:"song_title" json:"song_title"`
