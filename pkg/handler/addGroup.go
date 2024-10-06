@@ -8,6 +8,18 @@ import (
 	"net/http"
 )
 
+// @summary AddGroup
+// @Tags Group
+// @Description create group
+// @ID create-group
+// @Accept json
+// @Produce json
+// @Param input body model.Group true "group name"
+// @Success 200 {int} int "id group"
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /Group [post]
+
 func (h *Handler) AddGroup(c *gin.Context) {
 
 	var group model.Group

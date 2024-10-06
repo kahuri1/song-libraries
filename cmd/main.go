@@ -12,6 +12,11 @@ import (
 	"github.com/spf13/viper"
 )
 
+// @title Song libraries API
+// @version 1.0
+
+// @host localhost:8000
+// @basePath /
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 

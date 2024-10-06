@@ -2,7 +2,10 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	_ "github.com/kahuri1/song-libraries/docs"
 	"github.com/kahuri1/song-libraries/pkg/model"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type songLibsService interface {
@@ -27,6 +30,7 @@ func Newhandler(service songLibsService) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.GET("/library", h.Library)
 	r.POST("/Group", h.AddGroup)
 	r.DELETE("/Group/", h.DeleteGroup)
