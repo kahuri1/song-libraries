@@ -14,6 +14,7 @@ import (
 
 // @title Song libraries API
 // @version 1.0
+// @description API server song-details
 
 // @host localhost:8000
 // @basePath /

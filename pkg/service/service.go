@@ -19,6 +19,7 @@ type repo interface {
 	UpdateSongDetails(g model.SongDetail) (bool, error)
 	SongID(title string) (int64, error)
 	SongText(g model.GetSongText) (string, error)
+	SongInfo(group string, song string) (model.SongDetailInfo, error)
 }
 
 type Service struct {

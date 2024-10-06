@@ -1,8 +1,374 @@
 basePath: /
+definitions:
+  model.BodyPagination:
+    properties:
+      limit:
+        type: integer
+      lines:
+        items:
+          type: string
+        type: array
+      page:
+        type: integer
+    type: object
+  model.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  model.GetSongText:
+    properties:
+      id:
+        type: integer
+      link:
+        type: string
+      songId:
+        type: integer
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  model.Group:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  model.LibraryConfig:
+    properties:
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      sortOrder:
+        type: string
+      sortTitle:
+        type: string
+    type: object
+  model.RequestInfo:
+    properties:
+      group:
+        type: string
+      name:
+        type: string
+    type: object
+  model.Song:
+    properties:
+      group:
+        type: string
+      group_id:
+        type: integer
+      id:
+        type: integer
+      releaseDate:
+        type: string
+      title:
+        type: string
+    type: object
+  model.SongDetail:
+    properties:
+      id:
+        type: integer
+      link:
+        type: string
+      songId:
+        type: integer
+      text:
+        type: string
+    type: object
+  model.SongDetailInfo:
+    properties:
+      link:
+        type: string
+      releaseDate:
+        type: string
+      text:
+        type: string
+    type: object
+  model.SongLibs:
+    properties:
+      group_name:
+        type: string
+      release_date:
+        type: string
+      song_link:
+        type: string
+      song_text:
+        type: string
+      song_title:
+        type: string
+    type: object
+  model.SongsResponse:
+    properties:
+      SongLibs:
+        items:
+          $ref: '#/definitions/model.SongLibs'
+        type: array
+    type: object
 host: localhost:8000
 info:
   contact: {}
+  description: API server song-details
   title: Song libraries API
   version: "1.0"
-paths: {}
+paths:
+  /Group:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a group by ID
+      operationId: delete-group
+      parameters:
+      - description: ID of the group to delete
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Group deleted successfully
+          schema:
+            type: string
+        "400":
+          description: Invalid ID parameter
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "404":
+          description: Group not found
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Delete Group
+      tags:
+      - Group
+    post:
+      consumes:
+      - application/json
+      description: create group
+      operationId: create-group
+      parameters:
+      - description: group name
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/model.Group'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: id group
+          schema:
+            type: int64
+      summary: AddGroup
+      tags:
+      - Group
+  /Song:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a song by ID
+      operationId: delete-song
+      parameters:
+      - description: ID of the song to delete
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Song deleted successfully
+          schema:
+            type: string
+        "400":
+          description: Invalid ID parameter
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "404":
+          description: Group not found
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Delete Song
+      tags:
+      - Song
+    post:
+      consumes:
+      - application/json
+      description: create song
+      operationId: create-song
+      parameters:
+      - description: info song
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/model.Song'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: id group
+          schema:
+            type: int64
+      summary: AddSong
+      tags:
+      - Song
+  /Song/Details:
+    post:
+      consumes:
+      - application/json
+      description: create songDetails
+      operationId: create-song
+      parameters:
+      - description: info songDetails
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/model.SongDetail'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: id songDetails
+          schema:
+            type: int64
+      summary: AddSongDetails
+      tags:
+      - Song
+    put:
+      consumes:
+      - application/json
+      description: Update the details of a song
+      operationId: update-song-details
+      parameters:
+      - description: Song details
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/model.SongDetail'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Update confirmation
+          schema:
+            type: string
+        "400":
+          description: Invalid ID parameter
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "404":
+          description: Group not found
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Update Song Details
+      tags:
+      - Song
+  /Song/Text:
+    post:
+      consumes:
+      - application/json
+      description: Retrieve the text of a song based on provided details
+      operationId: get-song-text
+      parameters:
+      - description: Song details
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/model.GetSongText'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lines of the song
+          schema:
+            $ref: '#/definitions/model.BodyPagination'
+        "400":
+          description: Invalid ID parameter
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "404":
+          description: Group not found
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Get Song Text
+      tags:
+      - Song
+  /info:
+    post:
+      consumes:
+      - application/json
+      description: Retrieve details of a song based on group and song name
+      operationId: get-song-info
+      parameters:
+      - description: Request Info
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.RequestInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Song details
+          schema:
+            $ref: '#/definitions/model.SongDetailInfo'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Get Song Info
+      tags:
+      - Info
+  /library:
+    post:
+      consumes:
+      - application/json
+      description: Get all songs in the library
+      parameters:
+      - description: config
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/model.LibraryConfig'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.SongsResponse'
+      summary: Get Library
+      tags:
+      - library
 swagger: "2.0"

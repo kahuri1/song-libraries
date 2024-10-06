@@ -8,6 +8,15 @@ import (
 	"net/http"
 )
 
+// @Summary AddSongDetails
+// @Tags Song
+// @Description create songDetails
+// @ID create-song
+// @Accept json
+// @Produce json
+// @Param input body model.SongDetail true "info songDetails"
+// @Success 200 {int64} int64 "id songDetails"
+// @Router /Song/Details [post]
 func (h *Handler) SongDetails(c *gin.Context) {
 	var songDetail model.SongDetail
 

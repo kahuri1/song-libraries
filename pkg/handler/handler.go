@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/kahuri1/song-libraries/docs"
 	"github.com/kahuri1/song-libraries/pkg/model"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
 )
 
 type songLibsService interface {
@@ -18,6 +18,7 @@ type songLibsService interface {
 	DeleteSong(id int64) error
 	SongText(g model.GetSongText) ([]string, error)
 	PaginationTextSong(g *model.BodyPagination) error
+	SongInfo(group string, song string) (model.SongDetailInfo, error)
 }
 
 type Handler struct {
@@ -31,7 +32,7 @@ func Newhandler(service songLibsService) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.GET("/library", h.Library)
+	r.POST("/library", h.Library)
 	r.POST("/Group", h.AddGroup)
 	r.DELETE("/Group/", h.DeleteGroup)
 	r.POST("/Song", h.AddSong)
@@ -39,5 +40,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	r.POST("/Song/Details", h.SongDetails)
 	r.PUT("/Song/Details", h.UpdateSongDetails)
 	r.GET("/Song/Details", h.SongText)
+	r.POST("/info", h.SongInfo)
 	return r
 }

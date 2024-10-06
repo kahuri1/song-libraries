@@ -9,6 +9,18 @@ import (
 	"net/http"
 )
 
+// @Summary Update Song Details
+// @Tags Song
+// @Description Update the details of a song
+// @ID update-song-details
+// @Accept json
+// @Produce json
+// @Param input body model.SongDetail true "Song details"
+// @Success 200 {object} string "Update confirmation"
+// @Failure 400 {object} model.ErrorResponse "Invalid ID parameter"
+// @Failure 404 {object} model.ErrorResponse "Group not found"
+// @Failure 500 {object} model.ErrorResponse "Internal server error"
+// @Router /Song/Details [put]
 func (h *Handler) UpdateSongDetails(c *gin.Context) {
 	var songDetails model.SongDetail
 	d, err := c.GetRawData()

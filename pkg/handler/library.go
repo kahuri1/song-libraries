@@ -8,6 +8,15 @@ import (
 	"net/http"
 )
 
+// Library godoc
+// @Summary      Get Library
+// @Description  Get all songs in the library
+// @Tags         library
+// @Accept       json
+// @Produce      json
+// @Param input body model.LibraryConfig true "config"
+// @Success      200  {object} model.SongsResponse
+// @Router       /library [post]
 func (h *Handler) Library(c *gin.Context) {
 	var s model.LibraryConfig
 	d, err := c.GetRawData()

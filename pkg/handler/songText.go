@@ -8,6 +8,18 @@ import (
 	"net/http"
 )
 
+// @Summary Get Song Text
+// @Tags Song
+// @Description Retrieve the text of a song based on provided details
+// @ID get-song-text
+// @Accept json
+// @Produce json
+// @Param input body model.GetSongText true "Song details"
+// @Success 200 {object} model.BodyPagination "Lines of the song"
+// @Failure 400 {object} model.ErrorResponse "Invalid ID parameter"
+// @Failure 404 {object} model.ErrorResponse "Group not found"
+// @Failure 500 {object} model.ErrorResponse "Internal server error"
+// @Router /Song/Text [post]
 func (h *Handler) SongText(c *gin.Context) {
 	var g model.GetSongText
 	var b model.BodyPagination

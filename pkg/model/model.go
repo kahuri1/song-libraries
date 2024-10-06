@@ -61,3 +61,18 @@ type BodyPagination struct {
 	Page  int      `json:"page"`
 	Limit int      `json:"limit"`
 }
+
+type ErrorResponse struct {
+	Error string `json:"error"`
+}
+
+type SongDetailInfo struct {
+	ReleaseDate string `json:"releaseDate" db:"release_date"`
+	Text        string `json:"text" db:"text"`
+	Link        string `json:"link" db:"link"`
+}
+
+type RequestInfo struct {
+	Group string `json:"group"`
+	Name  string `json:"name"`
+}
